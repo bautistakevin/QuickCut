@@ -1,0 +1,50 @@
+﻿@model QuickCut.UI.Models.Rating
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rating</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RatingNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RatingNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Barber.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Barber.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Consumer.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Consumer.FirstName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RatingID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

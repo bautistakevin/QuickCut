@@ -1,0 +1,50 @@
+﻿@model QuickCutUI.Models.Service
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Service</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ServiceTitle)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ServiceTitle)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ServiceDescription)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ServiceDescription)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Barber.FirstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Barber.FirstName)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.BarberID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

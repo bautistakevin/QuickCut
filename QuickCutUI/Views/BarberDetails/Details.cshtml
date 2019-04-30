@@ -1,0 +1,66 @@
+﻿@model QuickCutUI.Models.BarberDetail
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>BarberDetail</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.OperationHours)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.OperationHours)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DaysOfWeek)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DaysOfWeek)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PolicyInfo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PolicyInfo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Barber.FirstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Barber.FirstName)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.BarberID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

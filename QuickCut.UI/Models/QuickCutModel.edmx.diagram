@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="904c752a50b44287becdd50861c7c5c1" Name="Diagram1">
+        <EntityTypeShape EntityType="QuickCutDataModel.Appointment" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuickCutDataModel.Barber" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuickCutDataModel.BarberDetail" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuickCutDataModel.Consumer" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuickCutDataModel.Rating" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuickCutDataModel.Service" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuickCutDataModel.ZIP" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="QuickCutDataModel.FK_dbo_Appointments_dbo_Barber_BarberID" ManuallyRouted="false" />
+        <AssociationConnector Association="QuickCutDataModel.FK_dbo_Appointments_dbo_Consumer_ConsumerID" ManuallyRouted="false" />
+        <AssociationConnector Association="QuickCutDataModel.FK_dbo_BarberDetails_dbo_Barber_BarberID" ManuallyRouted="false" />
+        <AssociationConnector Association="QuickCutDataModel.FK_dbo_Ratings_dbo_Barber_BarberID" ManuallyRouted="false" />
+        <AssociationConnector Association="QuickCutDataModel.FK_dbo_Services_dbo_Barber_BarberID" ManuallyRouted="false" />
+        <AssociationConnector Association="QuickCutDataModel.FK_dbo_Ratings_dbo_Consumer_ConsumerID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

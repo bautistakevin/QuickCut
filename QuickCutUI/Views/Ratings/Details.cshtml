@@ -1,0 +1,58 @@
+﻿@model QuickCutUI.Models.Rating
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Rating</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.RatingNumber)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.RatingNumber)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Barber.FirstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Barber.FirstName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Consumer.FirstName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Consumer.FirstName)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.RatingID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

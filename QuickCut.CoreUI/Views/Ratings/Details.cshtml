@@ -1,0 +1,42 @@
+﻿@model QuickCut.CoreUI.Models.Ratings
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Ratings</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RatingNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RatingNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Comments)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Barber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Barber.BarberAddress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Consumer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Consumer.Address)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.RatingId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

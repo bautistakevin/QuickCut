@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QuickCutDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Appointments">
+          <Key>
+            <PropertyRef Name="AppointmentID" />
+          </Key>
+          <Property Name="AppointmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BarberID" Type="int" Nullable="false" />
+          <Property Name="ConsumerID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Barber">
+          <Key>
+            <PropertyRef Name="BarberID" />
+          </Key>
+          <Property Name="BarberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BarberAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Zip" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BarberDetails">
+          <Key>
+            <PropertyRef Name="BarberID" />
+          </Key>
+          <Property Name="BarberID" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="OperationHours" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DaysOfWeek" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PolicyInfo" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Consumer">
+          <Key>
+            <PropertyRef Name="ConsumerID" />
+          </Key>
+          <Property Name="ConsumerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Zip" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="Ratings">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BarberID" Type="int" Nullable="false" />
+          <Property Name="ConsumerID" Type="int" Nullable="false" />
+          <Property Name="RatingNumber" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="BarberID" />
+          </Key>
+          <Property Name="BarberID" Type="int" Nullable="false" />
+          <Property Name="ServiceTitle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServiceDescription" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZIP">
+          <Key>
+            <PropertyRef Name="Zip" />
+          </Key>
+          <Property Name="Zip" Type="int" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Appointments_dbo_Barber_BarberID">
+          <End Role="Barber" Type="Self.Barber" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barber">
+              <PropertyRef Name="BarberID" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="BarberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Appointments_dbo_Consumer_ConsumerID">
+          <End Role="Consumer" Type="Self.Consumer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consumer">
+              <PropertyRef Name="ConsumerID" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="ConsumerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BarberDetails_dbo_Barber_BarberID">
+          <End Role="Barber" Type="Self.Barber" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BarberDetails" Type="Self.BarberDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Barber">
+              <PropertyRef Name="BarberID" />
+            </Principal>
+            <Dependent Role="BarberDetails">
+              <PropertyRef Name="BarberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ratings_dbo_Barber_BarberID">
+          <End Role="Barber" Type="Self.Barber" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barber">
+              <PropertyRef Name="BarberID" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="BarberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ratings_dbo_Consumer_ConsumerID">
+          <End Role="Consumer" Type="Self.Consumer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consumer">
+              <PropertyRef Name="ConsumerID" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="ConsumerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Services_dbo_Barber_BarberID">
+          <End Role="Barber" Type="Self.Barber" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Barber">
+              <PropertyRef Name="BarberID" />
+            </Principal>
+            <Dependent Role="Services">
+              <PropertyRef Name="BarberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuickCutDataModelStoreContainer">
+          <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Barber" EntityType="Self.Barber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BarberDetails" EntityType="Self.BarberDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consumer" EntityType="Self.Consumer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ratings" EntityType="Self.Ratings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZIP" EntityType="Self.ZIP" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Appointments_dbo_Barber_BarberID" Association="Self.FK_dbo_Appointments_dbo_Barber_BarberID">
+            <End Role="Barber" EntitySet="Barber" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Appointments_dbo_Consumer_ConsumerID" Association="Self.FK_dbo_Appointments_dbo_Consumer_ConsumerID">
+            <End Role="Consumer" EntitySet="Consumer" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BarberDetails_dbo_Barber_BarberID" Association="Self.FK_dbo_BarberDetails_dbo_Barber_BarberID">
+            <End Role="Barber" EntitySet="Barber" />
+            <End Role="BarberDetails" EntitySet="BarberDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ratings_dbo_Barber_BarberID" Association="Self.FK_dbo_Ratings_dbo_Barber_BarberID">
+            <End Role="Barber" EntitySet="Barber" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ratings_dbo_Consumer_ConsumerID" Association="Self.FK_dbo_Ratings_dbo_Consumer_ConsumerID">
+            <End Role="Consumer" EntitySet="Consumer" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Services_dbo_Barber_BarberID" Association="Self.FK_dbo_Services_dbo_Barber_BarberID">
+            <End Role="Barber" EntitySet="Barber" />
+            <End Role="Services" EntitySet="Services" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuickCutDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="AppointmentID" />
+          </Key>
+          <Property Name="AppointmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BarberID" Type="Int32" Nullable="false" />
+          <Property Name="ConsumerID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Barber" Relationship="Self.FK_dbo_Appointments_dbo_Barber_BarberID" FromRole="Appointments" ToRole="Barber" />
+          <NavigationProperty Name="Consumer" Relationship="Self.FK_dbo_Appointments_dbo_Consumer_ConsumerID" FromRole="Appointments" ToRole="Consumer" />
+        </EntityType>
+        <EntityType Name="Barber">
+          <Key>
+            <PropertyRef Name="BarberID" />
+          </Key>
+          <Property Name="BarberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BarberAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Zip" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Appointments" Relationship="Self.FK_dbo_Appointments_dbo_Barber_BarberID" FromRole="Barber" ToRole="Appointments" />
+          <NavigationProperty Name="BarberDetail" Relationship="Self.FK_dbo_BarberDetails_dbo_Barber_BarberID" FromRole="Barber" ToRole="BarberDetails" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK_dbo_Ratings_dbo_Barber_BarberID" FromRole="Barber" ToRole="Ratings" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_dbo_Services_dbo_Barber_BarberID" FromRole="Barber" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="BarberDetail">
+          <Key>
+            <PropertyRef Name="BarberID" />
+          </Key>
+          <Property Name="BarberID" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OperationHours" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DaysOfWeek" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PolicyInfo" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Barber" Relationship="Self.FK_dbo_BarberDetails_dbo_Barber_BarberID" FromRole="BarberDetails" ToRole="Barber" />
+        </EntityType>
+        <EntityType Name="Consumer">
+          <Key>
+            <PropertyRef Name="ConsumerID" />
+          </Key>
+          <Property Name="ConsumerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Appointments" Relationship="Self.FK_dbo_Appointments_dbo_Consumer_ConsumerID" FromRole="Consumer" ToRole="Appointments" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK_dbo_Ratings_dbo_Consumer_ConsumerID" FromRole="Consumer" ToRole="Ratings" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="RatingID" />
+          </Key>
+          <Property Name="RatingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BarberID" Type="Int32" Nullable="false" />
+          <Property Name="ConsumerID" Type="Int32" Nullable="false" />
+          <Property Name="RatingNumber" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Barber" Relationship="Self.FK_dbo_Ratings_dbo_Barber_BarberID" FromRole="Ratings" ToRole="Barber" />
+          <NavigationProperty Name="Consumer" Relationship="Self.FK_dbo_Ratings_dbo_Consumer_ConsumerID" FromRole="Ratings" ToRole="Consumer" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="BarberID" />
+          </Key>
+          <Property Name="BarberID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ServiceDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Barber" Relationship="Self.FK_dbo_Services_dbo_Barber_BarberID" FromRole="Services" ToRole="Barber" />
+        </EntityType>
+        <EntityType Name="ZIP">
+          <Key>
+            <PropertyRef Name="Zip1" />
+          </Key>
+          <Property Name="Zip1" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Appointments_dbo_Barber_BarberID">
+          <End Role="Barber" Type="Self.Barber" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Appointments" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barber">
+              <PropertyRef Name="BarberID" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="BarberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Appointments_dbo_Consumer_ConsumerID">
+          <End Role="Consumer" Type="Self.Consumer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Appointments" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consumer">
+              <PropertyRef Name="ConsumerID" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="ConsumerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BarberDetails_dbo_Barber_BarberID">
+          <End Role="Barber" Type="Self.Barber" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BarberDetails" Type="Self.BarberDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Barber">
+              <PropertyRef Name="BarberID" />
+            </Principal>
+            <Dependent Role="BarberDetails">
+              <PropertyRef Name="BarberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ratings_dbo_Barber_BarberID">
+          <End Role="Barber" Type="Self.Barber" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ratings" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Barber">
+              <PropertyRef Name="BarberID" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="BarberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Services_dbo_Barber_BarberID">
+          <End Role="Barber" Type="Self.Barber" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Services" Type="Self.Service" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Barber">
+              <PropertyRef Name="BarberID" />
+            </Principal>
+            <Dependent Role="Services">
+              <PropertyRef Name="BarberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ratings_dbo_Consumer_ConsumerID">
+          <End Role="Consumer" Type="Self.Consumer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Ratings" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consumer">
+              <PropertyRef Name="ConsumerID" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="ConsumerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Appointments" EntityType="Self.Appointment" />
+          <EntitySet Name="Barbers" EntityType="Self.Barber" />
+          <EntitySet Name="BarberDetails" EntityType="Self.BarberDetail" />
+          <EntitySet Name="Consumers" EntityType="Self.Consumer" />
+          <EntitySet Name="Ratings" EntityType="Self.Rating" />
+          <EntitySet Name="Services" EntityType="Self.Service" />
+          <EntitySet Name="ZIPs" EntityType="Self.ZIP" />
+          <AssociationSet Name="FK_dbo_Appointments_dbo_Barber_BarberID" Association="Self.FK_dbo_Appointments_dbo_Barber_BarberID">
+            <End Role="Barber" EntitySet="Barbers" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Appointments_dbo_Consumer_ConsumerID" Association="Self.FK_dbo_Appointments_dbo_Consumer_ConsumerID">
+            <End Role="Consumer" EntitySet="Consumers" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BarberDetails_dbo_Barber_BarberID" Association="Self.FK_dbo_BarberDetails_dbo_Barber_BarberID">
+            <End Role="Barber" EntitySet="Barbers" />
+            <End Role="BarberDetails" EntitySet="BarberDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ratings_dbo_Barber_BarberID" Association="Self.FK_dbo_Ratings_dbo_Barber_BarberID">
+            <End Role="Barber" EntitySet="Barbers" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Services_dbo_Barber_BarberID" Association="Self.FK_dbo_Services_dbo_Barber_BarberID">
+            <End Role="Barber" EntitySet="Barbers" />
+            <End Role="Services" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ratings_dbo_Consumer_ConsumerID" Association="Self.FK_dbo_Ratings_dbo_Consumer_ConsumerID">
+            <End Role="Consumer" EntitySet="Consumers" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuickCutDataModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Appointments">
+            <EntityTypeMapping TypeName="QuickCutDataModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointments">
+                <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+                <ScalarProperty Name="BarberID" ColumnName="BarberID" />
+                <ScalarProperty Name="ConsumerID" ColumnName="ConsumerID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Barbers">
+            <EntityTypeMapping TypeName="QuickCutDataModel.Barber">
+              <MappingFragment StoreEntitySet="Barber">
+                <ScalarProperty Name="BarberID" ColumnName="BarberID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BarberAddress" ColumnName="BarberAddress" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BarberDetails">
+            <EntityTypeMapping TypeName="QuickCutDataModel.BarberDetail">
+              <MappingFragment StoreEntitySet="BarberDetails">
+                <ScalarProperty Name="BarberID" ColumnName="BarberID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="OperationHours" ColumnName="OperationHours" />
+                <ScalarProperty Name="DaysOfWeek" ColumnName="DaysOfWeek" />
+                <ScalarProperty Name="PolicyInfo" ColumnName="PolicyInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Consumers">
+            <EntityTypeMapping TypeName="QuickCutDataModel.Consumer">
+              <MappingFragment StoreEntitySet="Consumer">
+                <ScalarProperty Name="ConsumerID" ColumnName="ConsumerID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="QuickCutDataModel.Rating">
+              <MappingFragment StoreEntitySet="Ratings">
+                <ScalarProperty Name="RatingID" ColumnName="RatingID" />
+                <ScalarProperty Name="BarberID" ColumnName="BarberID" />
+                <ScalarProperty Name="ConsumerID" ColumnName="ConsumerID" />
+                <ScalarProperty Name="RatingNumber" ColumnName="RatingNumber" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="QuickCutDataModel.Service">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="BarberID" ColumnName="BarberID" />
+                <ScalarProperty Name="ServiceTitle" ColumnName="ServiceTitle" />
+                <ScalarProperty Name="ServiceDescription" ColumnName="ServiceDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZIPs">
+            <EntityTypeMapping TypeName="QuickCutDataModel.ZIP">
+              <MappingFragment StoreEntitySet="ZIP">
+                <ScalarProperty Name="Zip1" ColumnName="Zip" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
