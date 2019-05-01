@@ -22,19 +22,21 @@
 </div>
 
 <div class="card-deck">
-    @foreach (Barber barber in ViewBag.barbers)
-    {
+    @foreach (BarberViewModel barber in ViewBag.BarberServices)
+     {
     <div class="card">
+        <img class="card-img-top" src="~/img/sampleBarber.jpg" alt="barber"/>
         <div class="card-body">
-            <h5 class="card-title">@barber.FirstName @barber.LastName</h5>
-            <p class="card-text">@barber.BarberAddress</p>
-              @foreach(Services services in ViewBag.services)
-              {
-                  <p class="card-text"> @services.ServiceTitle.ToString() </p>
-              }       
+            <h5 class="card-title">@barber.barber.FirstName @barber.barber.LastName</h5>
+            <p class="card-text">@barber.barber.BarberAddress</p>
+            @foreach (Services services in barber.services)
+            {
+                <p class="card-text"> @services.ServiceTitle.ToString() </p>
+            }
         </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
         </div>
-    }
+    </div>
+     }
+</div>

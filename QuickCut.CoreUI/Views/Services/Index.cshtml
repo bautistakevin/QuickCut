@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<QuickCut.CoreUI.Models.Services>
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -34,7 +35,7 @@
                 @Html.DisplayFor(modelItem => item.ServiceDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Barber.BarberAddress)
+                @Html.DisplayFor(modelItem => item.Barber.BarberId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.BarberId">Edit</a> |

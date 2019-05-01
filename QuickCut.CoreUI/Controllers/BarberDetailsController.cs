@@ -47,7 +47,7 @@ namespace QuickCut.CoreUI.Controllers
         // GET: BarberDetails/Create
         public IActionResult Create()
         {
-            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberAddress");
+            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberId");
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace QuickCut.CoreUI.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberAddress", barberDetails.BarberId);
+            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberId", barberDetails.BarberId);
             return View(barberDetails);
         }
 
@@ -81,7 +81,7 @@ namespace QuickCut.CoreUI.Controllers
             {
                 return NotFound();
             }
-            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberAddress", barberDetails.BarberId);
+            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberId", barberDetails.BarberId);
             return View(barberDetails);
         }
 
@@ -117,7 +117,7 @@ namespace QuickCut.CoreUI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberAddress", barberDetails.BarberId);
+            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberId", barberDetails.BarberId);
             return View(barberDetails);
         }
 

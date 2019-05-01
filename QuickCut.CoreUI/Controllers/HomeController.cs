@@ -20,13 +20,19 @@ namespace QuickCut.CoreUI.Controllers
 
         public IActionResult Index()
         {
+            List<BarberViewModel> bs = new List<BarberViewModel>();
+
             List<Barber> barbers = QuickCutDbContext.Barber.FromSql($"SELECT * FROM Barber WHERE BarberId IS NOT NULL").ToList();
 
-            ViewBag.barbers = barbers;
+            foreach(Barber barber in barbers)
+            {
+                BarberViewModel temp = new BarberViewModel();
+                temp.services = QuickCutDbContext.Services.Where(s => s.BarberId.Equals(barber.BarberId)).ToList();
+                temp.barber = barber;
+                bs.Add(temp);
+            }
 
-            List<Services> services = QuickCutDbContext.Services.Where(s => s.BarberId.Equals(barbers)).ToList();
-
-            ViewBag.services = services;
+            ViewBag.BarberServices = bs;
 
             return View();
         }

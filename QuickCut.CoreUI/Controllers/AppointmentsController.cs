@@ -21,7 +21,7 @@ namespace QuickCut.CoreUI.Controllers
         // GET: Appointments
         public async Task<IActionResult> Index()
         {
-            
+            //var userIdentity = User.Identity.Name;
             var QuickCutDataDbContext = _context.Appointments.Include(a => a.Barber).Include(a => a.Consumer);
             return View(await QuickCutDataDbContext.ToListAsync());
         }
@@ -49,8 +49,8 @@ namespace QuickCut.CoreUI.Controllers
         // GET: Appointments/Create
         public IActionResult Create()
         {
-            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberAddress");
-            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "Address");
+            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberId");
+            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "ConsumerId");
             return View();
         }
 
@@ -67,8 +67,8 @@ namespace QuickCut.CoreUI.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberAddress", appointments.BarberId);
-            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "Address", appointments.ConsumerId);
+            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberId", appointments.BarberId);
+            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "ConsumerId", appointments.ConsumerId);
             return View(appointments);
         }
 
@@ -85,8 +85,8 @@ namespace QuickCut.CoreUI.Controllers
             {
                 return NotFound();
             }
-            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberAddress", appointments.BarberId);
-            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "Address", appointments.ConsumerId);
+            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberId", appointments.BarberId);
+            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "ConsumerId", appointments.ConsumerId);
             return View(appointments);
         }
 
@@ -122,8 +122,8 @@ namespace QuickCut.CoreUI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberAddress", appointments.BarberId);
-            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "Address", appointments.ConsumerId);
+            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberId", appointments.BarberId);
+            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "ConsumerId", appointments.ConsumerId);
             return View(appointments);
         }
 

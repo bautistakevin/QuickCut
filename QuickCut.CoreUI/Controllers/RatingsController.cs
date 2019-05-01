@@ -48,8 +48,8 @@ namespace QuickCut.CoreUI.Controllers
         // GET: Ratings/Create
         public IActionResult Create()
         {
-            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberAddress");
-            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "Address");
+            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberId");
+            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "ConsumerId");
             return View();
         }
 
@@ -66,8 +66,8 @@ namespace QuickCut.CoreUI.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberAddress", ratings.BarberId);
-            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "Address", ratings.ConsumerId);
+            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberId", ratings.BarberId);
+            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "ConsumerId", ratings.ConsumerId);
             return View(ratings);
         }
 
@@ -84,8 +84,8 @@ namespace QuickCut.CoreUI.Controllers
             {
                 return NotFound();
             }
-            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberAddress", ratings.BarberId);
-            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "Address", ratings.ConsumerId);
+            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberId", ratings.BarberId);
+            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "ConsumerId", ratings.ConsumerId);
             return View(ratings);
         }
 
@@ -121,8 +121,8 @@ namespace QuickCut.CoreUI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberAddress", ratings.BarberId);
-            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "Address", ratings.ConsumerId);
+            ViewData["BarberId"] = new SelectList(_context.Barber, "BarberId", "BarberId", ratings.BarberId);
+            ViewData["ConsumerId"] = new SelectList(_context.Consumer, "ConsumerId", "ConsumerId", ratings.ConsumerId);
             return View(ratings);
         }
 
